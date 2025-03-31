@@ -1,0 +1,9 @@
+# Dockerfile.cpu
+FROM jupyter/base-notebook:latest
+
+RUN pip install \
+    numpy pandas matplotlib scikit-learn \
+    jupyterlab
+
+# Default working directory
+WORKDIR /home/jovyan/work
