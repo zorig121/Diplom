@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends
 from core.security import get_current_user
 from db.mongodb import get_db
+from fastapi.responses import JSONResponse
 
 router = APIRouter()
 
@@ -15,4 +16,7 @@ async def get_users(db=Depends(get_db)):
 
 @router.post("/logout")
 async def logout():
-    return {"message": "Logged out. Please remove token from localStorage"}
+    response = JSONResponse(content={"message": "Logged out"})
+    response.delete_cookie("access_token")
+    return response
+
